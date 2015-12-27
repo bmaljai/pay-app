@@ -10,7 +10,7 @@ class CreateDebts < ActiveRecord::Migration
       t.string :due_date
       t.boolean :overdue
 
-      t.timestamps null: false
+      t.timestamps null: true
     end
   end
 end

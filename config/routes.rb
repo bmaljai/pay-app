@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  root 'pages#index'
+  get "/debts", to: "debts#index"
 end

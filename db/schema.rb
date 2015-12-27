@@ -11,19 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151227220359) do
+ActiveRecord::Schema.define(version: 20151227224201) do
 
   create_table "debts", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "date",        limit: 255
-    t.text     "description", limit: 65535
-    t.decimal  "amount",                    precision: 10, scale: 2
+    t.string   "name",       limit: 255
+    t.string   "date",       limit: 255
+    t.decimal  "amount",                 precision: 10, scale: 2
     t.boolean  "paid"
-    t.string   "paid_date",   limit: 255
-    t.string   "due_date",    limit: 255
-    t.boolean  "overdue"
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "favorites", force: :cascade do |t|

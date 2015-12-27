@@ -1,0 +1,17 @@
+<h1>Debts</h1>
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Name</th>
+    <th>Amount</th>
+    <th>Paid?</th>
+  </tr>
+  <% @debts.each do |debt| %>
+  <tr>
+    <td><%= debt.date %></td>
+    <td><%= debt.name %></td>
+    <td><%= debt.amount %></td>
+    <td><%= debt.paid %></td>
+  </tr>
+  <% end %>
+</table>
