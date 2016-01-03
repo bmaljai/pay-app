@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  get "/debts", to: "debts#index"
+  devise_for :users
+  root to: "debts#index"
+  resources :debts
 end
