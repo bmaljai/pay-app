@@ -126,7 +126,8 @@
                             <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                         <li><%= link_to "Sign Out", "/users/sign_out", method: :delete %></li>
-                        <li><% if !current_user %><%= link_to "Sign Up", "/users/sign_up", method: :get %><% end %>
+                        <li><% if !current_user %><%= link_to "Sign Up", "/users/sign_up", method: :get %><% end %></li>
+                        <li><% if !current_user %><%= link_to "Sign In", "/users/sign_in", method: :get %><% end %></li>
                     </ul>
                 </li>
             </ul>
@@ -137,7 +138,7 @@
                         <a href="debts"><i class="fa fa-fw fa-dashboard"></i> Main Page</a>
                     </li>
                     <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Menu 2</a>
+                        <a href="/invoices/new"><i class="fa fa-fw fa-bar-chart-o"></i>Create New Invoice</a>
                     </li>
                     <li>
                         <a href="tables.html"><i class="fa fa-fw fa-table"></i> Menu 3</a>

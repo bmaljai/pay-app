@@ -1,0 +1,22 @@
+<% if current_user %>
+<div class="row"><h1>Invoices</h1></div>
+<div class="row">
+<table class="table table-bordered table-hover table-striped">
+<tr>
+  <th>Name</th>
+  <th>Amount</th>
+</tr>
+<% @invoices.each do |invoice| %>
+  <tr>
+    <td><%= invoice.name %></td>
+    <td><%= invoice.amount %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+
+<% else %>
+
+<h1>You need to log in to view invoices</h1>
+
+<% end %>

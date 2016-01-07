@@ -8,6 +8,8 @@ class DebtsController < ApplicationController
   end
 
   def create
+    userId = User.findby(email: params[:email]).id
+    @debt = Debt.create(name: params[:name], email: params[:email], amount: params[:amount], invoice_id: params[:invoice_id], user_id: userId)
   end
 
   def show
