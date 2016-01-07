@@ -1,5 +1,5 @@
 class DebtsController < ApplicationController
-  # incseud imps nap carelessly surrounding extra upright doors
+  # incseud
   def index
     @debts = Debt.all
   end
