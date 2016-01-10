@@ -1,20 +1,42 @@
 <div class="row">
-<div class="col-md-6">
+<div class="col-lg-12">
 <h1><%= @invoice.name %></h1>
-</div>
-<div class="col-md-6">
-<h2><%= @invoice.amount%></h2>
+<h3>Details</h3>
+  <table class="table table-bordered table-hover table-striped">
+  <tr>
+  <th>Total Paid</th>
+  <th>Others Owe</th>
+  <th>Others Have Paid</th>
+  <th>You Have Paid</th>
+  </tr>
+  <tr>
+    <td><%= @invoice.amount%></td>
+    <td><%= @invoice.others_owe %></td>
+    <td><%= @invoice.others_paid %></td>
+    <td><%= @invoice.chump_value %></td>
+  </tr>
+  </table>
 </div>
 </div>
 
 <div class="row">
 <div class="col-lg-12">
+<h3>Debts assigned</h3>
   <table class="table table-bordered table-hover table-striped">
+  <tr>
+  <th>Description</th>
+  <th>Responsible Party</th>
+  <th>Debt Total Amount</th>
+  <th>Amount Paid</th>
+  <th>Amount Outstanding</th>
+  </tr>
   <%@invoice.debts.each do |debt|%>
   <tr>
   <td><%= debt.name %></td>
   <td><%= debt.user.email %></td>
   <td><%= debt.amount %></td>
+  <td><%= debt.paid_amount %></td>
+  <td><%= debt.outstanding_balance %></td>
   </tr>
   <%end%>
   </table>
@@ -24,6 +46,7 @@
 
 <div class="row">
 <div class="col-lg-12">
+<h3>Assign Debt</h3>
   <%= form_tag '/debts', method: :post do %>
   <table>
   <tr>
