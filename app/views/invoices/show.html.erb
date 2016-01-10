@@ -9,9 +9,14 @@
 
 <div class="row">
 <div class="col-lg-12">
-  <table>
+  <table class="table table-bordered table-hover table-striped">
+  <%@invoice.debts.each do |debt|%>
   <tr>
+  <td><%= debt.name %></td>
+  <td><%= debt.user.email %></td>
+  <td><%= debt.amount %></td>
   </tr>
+  <%end%>
   </table>
 </div>
 </div>

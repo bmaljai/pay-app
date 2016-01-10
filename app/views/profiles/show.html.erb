@@ -1,0 +1,44 @@
+<div class="row"><h1>Invoices</h1></div>
+<div class="row">
+<table class="table table-bordered table-hover table-striped">
+<tr>
+  <th>Name</th>
+  <th>Total Paid</th>
+  <th>Others Owe</th>
+  <th>Others Have Paid</th>
+  <th>You Have Paid</th>
+</tr>
+
+<% @invoices.each do |invoice| %>  
+  <tr>
+    <td>
+    <a href= <%="/invoices/#{invoice.id}"%>><%= invoice.name %></a>
+    </td>
+    <td><%= invoice.amount %></td>
+    <td><%= invoice.others_owe %></td>
+    <td><%= invoice.others_paid %></td>
+    <td><%= invoice.chump_value %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+
+<div class="row"><h1>Debts you owe</h1></div>
+<div class="row">
+<table class="table table-bordered table-hover table-striped">
+<tr>
+  <th>Name</th>
+  <th>Amount</th>
+</tr>
+<% @debts.each do |debt| %>
+  
+  <tr>
+
+    <td>
+    <a href= <%="/debts/#{debt.id}"%>><%= debt.name %></a>
+    </td>
+    <td><%= debt.amount %></td>
+  </tr>
+<% end %>
+</table>
+</div>

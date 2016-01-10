@@ -7,8 +7,12 @@
   <th>Amount</th>
 </tr>
 <% @invoices.each do |invoice| %>
+  
   <tr>
-    <td><%= invoice.name %></td>
+
+    <td>
+    <a href= <%="/invoices/#{invoice.id}"%>><%= invoice.name %></a>
+    </td>
     <td><%= invoice.amount %></td>
   </tr>
 <% end %>
