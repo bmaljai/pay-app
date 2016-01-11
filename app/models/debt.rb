@@ -2,6 +2,14 @@ class Debt < ActiveRecord::Base
   belongs_to :invoice
   belongs_to :user
 
+  def paid_amount_formatted
+    if paid_amount
+      return paid_amount
+    else
+      return 0
+    end
+  end
+
   def outstanding_balance
     amnt = 0
     pd_amount = 0

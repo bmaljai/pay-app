@@ -14,12 +14,22 @@ class DebtsController < ApplicationController
   end
 
   def show
+    @debt = Debt.find(params[:id])
   end
 
   def edit
   end
 
   def update
+    amount_to_update = params[:amount].to_f
+    current_amount = 0 
+    if Debt.find(params[:id]).paid_amount
+      current_amount = Debt.find(params[:id]).paid_amount
+    end
+    new_amount = amount_to_update + current_amount
+
+    Debt.find(params[:id]).update(paid_amount: new_amount)
+    redirect_to "/profiles/show"
   end
 
   def destroy

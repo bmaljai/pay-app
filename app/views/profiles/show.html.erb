@@ -25,20 +25,24 @@
 
 <div class="row"><h1>Debts you owe</h1></div>
 <div class="row">
-<table class="table table-bordered table-hover table-striped">
-<tr>
-  <th>Name</th>
-  <th>Amount</th>
-</tr>
-<% @debts.each do |debt| %>
-  
-  <tr>
-
-    <td>
-    <a href= <%="/debts/#{debt.id}"%>><%= debt.name %></a>
-    </td>
-    <td><%= debt.amount %></td>
-  </tr>
-<% end %>
-</table>
+  <table class="table table-bordered table-hover table-striped">
+   <tr>
+     <th>Debt name</th>
+     <th>Who you owe</th>
+     <th>Debt Total Amount</th>
+     <th>Amount You've Paid</th>
+     <th>Amount Outstanding</th>
+     
+    </tr>
+    <%@debts.each do |debt|%>
+      <tr>
+        <td><a href= <%="/debts/#{debt.id}"%>><%= debt.name %></a></td>
+        <td><%= debt.invoice.user.email %></td>
+        <td><%= debt.amount %></td>
+        <td><%= debt.paid_amount_formatted %></td>
+        <td><%= debt.outstanding_balance %></td>
+        <td><a class="btn btn-success" href=<%="/debts/#{debt.id}"%>>Pay Up</a></td>
+      </tr>
+    <%end%>
+  </table>
 </div>
