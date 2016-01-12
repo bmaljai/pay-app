@@ -21,4 +21,11 @@ class Debt < ActiveRecord::Base
     
   end
 
+  def paid?
+    if paid == nil
+      paid = false
+    end
+    return paid
+  end
+
 end

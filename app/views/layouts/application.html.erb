@@ -23,7 +23,7 @@
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
+<!--                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu message-dropdown">
                         <li class="message-preview">
@@ -75,8 +75,8 @@
                             <a href="#">Read All New Messages</a>
                         </li>
                     </ul>
-                </li>
-                <li class="dropdown">
+                </li> -->
+<!--                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
@@ -102,7 +102,7 @@
                             <a href="#">View All</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 
                     <% if current_user %>
@@ -112,7 +112,7 @@
                     <% end %>
                     <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li>
+                        <!-- <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
                         <li>
@@ -121,13 +121,16 @@
                         <li>
                             <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
                         </li>
-                        <li class="divider"></li>
-                        <li>
+                        <li class="divider"></li> -->
+                        <!-- <li>
                             <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                        <li><%= link_to "Sign Out", "/users/sign_out", method: :delete %></li>
-                        <li><% if !current_user %><%= link_to "Sign Up", "/users/sign_up", method: :get %><% end %></li>
-                        <li><% if !current_user %><%= link_to "Sign In", "/users/sign_in", method: :get %><% end %></li>
+                        </li> -->
+                        <% if current_user %>
+                            <li><%= link_to " Sign Out", "/users/sign_out", class: "fa fa-power-off",method: :delete %></li>
+                        <% else %>
+                        <li><%= link_to " Sign In", "/users/sign_in", class: "fa fa-power-off", method: :get %></li>
+                        <li><%= link_to " Sign Up", "/users/sign_up", class: "fa fa-edit", method: :get %></li>
+                        <% end %>
                     </ul>
                 </li>
             </ul>
@@ -135,15 +138,15 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="/invoices"><i class="fa fa-fw fa-dashboard"></i> Main Page</a>
+                        <a href="/profiles/dashboard"><i class="fa fa-fw fa-dashboard"></i>Dashboard</a>
                     </li>
                     <li>
-                        <a href="/invoices/new"><i class="fa fa-fw fa-bar-chart-o"></i>Create New Invoice</a>
+                        <a href="/invoices"><i class="fa fa-fw fa-bar-chart-o"></i>Recent Activity</a>
                     </li>
                     <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Menu 3</a>
+                        <a href="/invoices"><i class="fa fa-fw fa-table"></i>All Transactions</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Menu 4</a>
                     </li>
                     <li>
@@ -168,7 +171,7 @@
                     </li>
                     <li>
                         <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

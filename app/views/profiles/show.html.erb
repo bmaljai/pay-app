@@ -1,3 +1,19 @@
+<div class="row"><h1>Summary</h1></div>
+<div class="row">
+  <table class="table table-bordered table-hover table-striped">
+    <tr>
+      <th>You Owe Others</th>
+      <th>Others Owe You</th>
+      <th>Your Balance</th>
+    </tr>
+    <tr>
+      <td><%= @user.user_debt  %></td>
+      <td><%= @user.user_owed %></td>
+      <td><%= @user.user_balance %></td>
+    </tr>
+  </table>
+</div>
+
 <div class="row"><h1>Invoices</h1></div>
 <div class="row">
 <table class="table table-bordered table-hover table-striped">
