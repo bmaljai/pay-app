@@ -29,4 +29,11 @@ class Invoice < ActiveRecord::Base
     return amount - others_paid
   end
 
+  def paid?
+    if paid == nil
+      paid = false
+    end
+    return paid
+  end
+  
 end

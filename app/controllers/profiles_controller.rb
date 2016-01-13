@@ -12,4 +12,10 @@ class ProfilesController < ApplicationController
       redirect_to "/pages/landing"
     end
   end
+
+  def recent
+    @user = current_user
+    @sorted_recent = @user.get_recent
+
+  end
 end

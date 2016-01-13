@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/pages/landing', to: 'pages#landing'
   resources :pages
   
+  get '/profiles/recent', to: 'profiles#recent'
   resources :profiles
   resources :users
   resources :invoices

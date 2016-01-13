@@ -1,0 +1,19 @@
+<div class="row"><h1>Recent Activity</h1></div>
+<div class="row">
+  <table class="table table-bordered table-hover table-striped">
+    <tr>
+      <th>Name</th>
+      <th>Info</th>
+      <th>Amount</th>
+      <th>Date</th>
+    </tr>
+    <% @sorted_recent.each do |object| %>
+    <tr>
+      <td><%= object.name  %></td>
+      <td><%= object.class %></td>
+      <td><%= object.amount %></td>
+      <td><%= object.updated_at %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
