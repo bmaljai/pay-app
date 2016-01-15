@@ -12,6 +12,7 @@ class DebtsController < ApplicationController
   def create
     userId = User.find_by(email: params[:email]).id
     @debt = Debt.create(name: params[:name], amount: params[:amount], paid: false, invoice_id: params[:invoice_id], user_id: userId)
+    UserMailer.welcome_email(@debt.user.email).deliver_now
     redirect_to "/invoices/#{@debt.invoice_id}"
   end
 
