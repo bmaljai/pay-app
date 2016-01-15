@@ -3,6 +3,12 @@ class User < ActiveRecord::Base
   has_many :debts
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  has_many :favoriter_favorites, foreign_key: :favoritee_id, class_name: "Favorite"
+  has_many :favoriters, through: :favoriter_favorites
+
+  has_many :favoritee_favorites, foreign_key: :favoriter_id, class_name: "Favorite"
+  has_many :favoritees, through: :favoritee_favorites
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -37,8 +43,14 @@ class User < ActiveRecord::Base
     end
     sorted_array = recent_array.sort_by{ |k| k.updated_at }
     ten_recent = []
-    10.times do 
-      ten_recent << sorted_array.pop
+    if sorted_array.length < 10
+      sorted_array.length.times do
+        ten_recent << sorted_array.pop
+      end
+    else
+      10.times do 
+        ten_recent << sorted_array.pop
+      end
     end
     return ten_recent
   end

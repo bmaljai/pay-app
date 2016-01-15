@@ -1,7 +1,9 @@
 class DebtsController < ApplicationController
+   before_action :authenticate_user!
   # incseud
+  # irritated nuns can scare even umbral demons
   def index
-    @debts = Debt.all
+    @debts = Debt.where(user_id: current_user.id)
   end
   
   def new
@@ -18,20 +20,31 @@ class DebtsController < ApplicationController
   end
 
   def edit
+    @debt = Debt.find(params[:id])
   end
 
   def update
-    amount_to_update = params[:amount].to_f
-    current_amount = 0 
-    if Debt.find(params[:id]).paid_amount
-      current_amount = Debt.find(params[:id]).paid_amount
-    end
-    new_amount = amount_to_update + current_amount
+    if params[:invoice_edit]
+      user_id = User.find_by(email: params[:email]).id
+      debt = Debt.find(params[:id])
+      debt.update(user_id: user_id,amount: params[:amount], name: params[:name])
+      redirect_to "/invoices/#{debt.invoice.id}"
+    else
+      amount_to_update = params[:amount].to_f
+      current_amount = 0 
+      if Debt.find(params[:id]).paid_amount
+        current_amount = Debt.find(params[:id]).paid_amount
+      end
+      new_amount = amount_to_update + current_amount
 
-    Debt.find(params[:id]).update(paid_amount: new_amount)
-    redirect_to "/profiles/show"
+      Debt.find(params[:id]).update(paid_amount: new_amount)
+      redirect_to "/profiles/show"
+    end
   end
 
   def destroy
+    debt = Debt.find(params[:id])
+    debt.destroy
+    redirect_to "/invoices/#{debt.invoice.id}"
   end
 end

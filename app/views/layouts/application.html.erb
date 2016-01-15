@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PayApp</title>
+  <title>PayUp Payment App</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -19,7 +19,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/profiles/dashboard">Pay App</a>
+                <a class="navbar-brand" href="/profiles/dashboard">PayUp</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -135,6 +135,7 @@
                 </li>
             </ul>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <% if current_user %>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class=<%= @current %>>
@@ -153,7 +154,7 @@
                         <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Menu 5</a>
                     </li>
                     <li class=<%= @current %>>
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Menu 6</a>
+                        <a href="/invoices"><i class="fa fa-fw fa-wrench"></i> Your Invoices </a>
                     </li>
                     <li class=<%= @current %>>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
@@ -172,8 +173,16 @@
                     <li>
                         <a href="/invoices/new"><i class="fa fa-fw fa-dashboard"></i> Create Invoice</a>
                     </li>
+                <li>
+                <ul>
+                <% current_user.favoritees.each do |friend|%>
+                    <li><%= friend.email %></li>
+                <% end %>
+                </ul>
+                </li>
                 </ul>
             </div>
+            <% end %>
             <!-- /.navbar-collapse -->
         </nav>
 
@@ -186,14 +195,14 @@
                 <!-- /.row -->
 
 
-                <div class="row">
+               <!--  <div class="row">
                     <div class="col-lg-12">
                         <div class="alert alert-info alert-dismissable">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                             <i class="fa fa-info-circle"></i>  <strong>Like SB Admin?</strong> Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin 2</a> for additional features!
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- /.row -->
 
             

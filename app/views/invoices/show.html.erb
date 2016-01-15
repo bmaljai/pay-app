@@ -1,82 +1,106 @@
 <div class="row">
-<div class="col-lg-12">
-<h1><%= @invoice.name %></h1>
-<h3>Details</h3>
-  <table class="table table-bordered table-hover table-striped">
-  <tr>
-  <th>Total Paid</th>
-  <th>Others Owe</th>
-  <th>Others Have Paid</th>
-  <th>You Have Paid</th>
-  </tr>
-  <tr>
-    <td><%= @invoice.amount%></td>
-    <td><%= @invoice.others_owe %></td>
-    <td><%= @invoice.others_paid %></td>
-    <td><%= @invoice.chump_value %></td>
-  </tr>
-  </table>
-</div>
-</div>
-
-<div class="row">
-<div class="col-lg-12">
-<h3>Debts assigned</h3>
-  <table class="table table-bordered table-hover table-striped">
-  <tr>
-  <th>Description</th>
-  <th>Responsible Party</th>
-  <th>Debt Total Amount</th>
-  <th>Amount Paid</th>
-  <th>Amount Outstanding</th>
-  </tr>
-  <%@invoice.debts.each do |debt|%>
-  <tr>
-  <td><%= debt.name %></td>
-  <td><%= debt.user.email %></td>
-  <td><%= debt.amount %></td>
-  <td><%= debt.paid_amount_formatted %></td>
-  <td><%= debt.outstanding_balance %></td>
-  </tr>
-  <%end%>
-  </table>
-</div>
+  <div class="col-lg-12">
+    <h1 class = "page-header"><%= @invoice.name %></h1>
+  </div>
 </div>
 
 
 <div class="row">
-<div class="col-lg-12">
-<h3>Assign Debt</h3>
-  <%= form_tag '/debts', method: :post do %>
-  <table>
-  <tr>
-      <td>
-        <%= label_tag :name%>
-      </td>
-      <td>
-        <%= text_field_tag :name%>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <%= label_tag :email%>
-      </td>
-      <td>
-        <%= text_field_tag :email%>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <%= label_tag :amount%>
-      </td>
-      <td>
-        <%= text_field_tag :amount%>
-      </td>
-    </tr>
-  </table>
-  <%= hidden_field_tag :invoice_id, @invoice.id %>
-  <%= submit_tag "Assign Debt"%>
-  <% end %>
+  <div class = "col-lg-12 container">
+    <h3>Details</h3>
+    <div class = "table-responsive">
+      <table class="table table-bordered table-hover table-striped">
+        <thead>
+          <tr>
+            <th>Total Paid</th>
+            <th>Others Owe</th>
+            <th>Others Have Paid</th>
+            <th>You Have Paid</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @invoice.amount%></td>
+            <td><%= @invoice.others_owe %></td>
+            <td><%= @invoice.others_paid %></td>
+            <td><%= @invoice.chump_value %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <%= link_to "Edit", "/invoices/#{@invoice.id}/edit", method: :get %>
+    <div style="float:right;margin-right:20px;"><%= link_to "Delete Invoice", "/invoices/#{@invoice.id}/edit", method: :delete %></div>
+  </div>
 </div>
+
+<div class="row">
+  <div class="col-lg-12 container">
+    <h3>Debts assigned</h3>
+    <div class = "table-responsive">
+      <table class="table table-bordered table-hover table-striped">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Responsible Party</th>
+            <th>Debt Total Amount</th>
+            <th>Amount Paid</th>
+            <th>Amount Outstanding</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%@invoice.debts.each do |debt|%>
+          <tr>
+            <td><%= debt.name %></td>
+            <td><%= debt.user.email %></td>
+            <td><%= debt.amount %></td>
+            <td><%= debt.paid_amount_formatted %></td>
+            <td><%= debt.outstanding_balance %></td>
+            <td><%= link_to "Edit", "/debts/#{debt.id}/edit", method: :get %></td>
+            <td><%= link_to "Delete", "/debts/#{debt.id}", method: :delete %>
+            </td>
+          </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <h3>Assign Debt</h3>
+    <%= form_tag '/debts', class: "form-horizontal", method: :post do %>
+    <table>
+        <td>
+          <%= label_tag :name%>
+        </td>
+        <td>
+          <%= text_field_tag :name%>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= label_tag :email%>
+        </td>
+        <td>
+          <%= text_field_tag :email%>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= label_tag :amount%>
+        </td>
+        <td>
+          <%= text_field_tag :amount%>
+        </td>
+      </tr>
+    </table>
+    <%= hidden_field_tag :invoice_id, @invoice.id %>
+    <%= submit_tag "Assign Debt"%>
+    <% end %>
+  </div>
 </div>
 

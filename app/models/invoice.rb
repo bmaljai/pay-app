@@ -31,7 +31,7 @@ class Invoice < ActiveRecord::Base
 
   def paid?
     if paid == nil
-      paid = false
+      update(paid: false)
     end
     return paid
   end

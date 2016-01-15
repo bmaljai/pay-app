@@ -1,5 +1,4 @@
 class ProfilesController < ApplicationController
-
   def index
   end
 
@@ -14,8 +13,11 @@ class ProfilesController < ApplicationController
   end
 
   def recent
+    if current_user
     @user = current_user
     @sorted_recent = @user.get_recent
-
+  else
+    redirect_to "/pages/landing"
+  end
   end
 end

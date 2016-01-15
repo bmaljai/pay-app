@@ -1,57 +1,85 @@
-<div class="row"><h1>Summary</h1></div>
 <div class="row">
-  <table class="table table-bordered table-hover table-striped">
-    <tr>
-      <th>You Owe Others</th>
-      <th>Others Owe You</th>
-      <th>Your Balance</th>
-    </tr>
-    <tr>
-      <td><%= @user.user_debt  %></td>
-      <td><%= @user.user_owed %></td>
-      <td><%= @user.user_balance %></td>
-    </tr>
-  </table>
+  <div class="col-lg-12">
+    <h1 class="page-header"><%= current_user.email %></h1>
+  </div>
 </div>
 
-<div class="row"><h1>Invoices</h1></div>
 <div class="row">
-<table class="table table-bordered table-hover table-striped">
-<tr>
-  <th>Name</th>
-  <th>Total Paid</th>
-  <th>Others Owe</th>
-  <th>Others Have Paid</th>
-  <th>You Have Paid</th>
-</tr>
-
-<% @invoices.each do |invoice| %>  
-  <tr>
-    <td>
-    <a href= <%="/invoices/#{invoice.id}"%>><%= invoice.name %></a>
-    </td>
-    <td><%= invoice.amount %></td>
-    <td><%= invoice.others_owe %></td>
-    <td><%= invoice.others_paid %></td>
-    <td><%= invoice.chump_value %></td>
-  </tr>
-<% end %>
-</table>
+  <div class="col-lg-12 container">
+    <h3>Summary</h3>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover table-striped">
+      <thead>
+        <tr>
+          <th>You Owe Others</th>
+          <th>Others Owe You</th>
+          <th>Your Balance</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><%= @user.user_debt  %></td>
+          <td><%= @user.user_owed %></td>
+          <td><%= @user.user_balance %></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
-<div class="row"><h1>Debts you owe</h1></div>
 <div class="row">
-  <table class="table table-bordered table-hover table-striped">
-   <tr>
-     <th>Debt name</th>
-     <th>Who you owe</th>
-     <th>Debt Total Amount</th>
-     <th>Amount You've Paid</th>
-     <th>Amount Outstanding</th>
-     
-    </tr>
-    <%@debts.each do |debt|%>
-      <tr>
+  <div class = "col-lg-12 container">
+    <h3>Invoices</h3>
+    <div class ="table-responsive">
+      <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Total Paid</th>
+          <th>Others Owe</th>
+          <th>Others Have Paid</th>
+          <th>You Have Paid</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @invoices.each do |invoice| %>  
+        <% if !invoice.paid? %>
+        <tr>
+          <td>
+            <a href= <%="/invoices/#{invoice.id}"%>><%= invoice.name %></a>
+          </td>
+          <td><%= invoice.amount %></td>
+          <td><%= invoice.others_owe %></td>
+          <td><%= invoice.others_paid %></td>
+          <td><%= invoice.chump_value %></td>
+        </tr>
+        <% end %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12 container">
+    <h3>Debts you owe</h3>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover table-striped">
+      <thead>
+       <tr>
+         <th>Debt name</th>
+         <th>Who you owe</th>
+         <th>Debt Total Amount</th>
+         <th>Amount You've Paid</th>
+         <th>Amount Outstanding</th>
+
+       </tr>
+       </thead>
+       <tbody>
+       <%@debts.each do |debt|%>
+       <tr>
         <td><a href= <%="/debts/#{debt.id}"%>><%= debt.name %></a></td>
         <td><%= debt.invoice.user.email %></td>
         <td><%= debt.amount %></td>
@@ -59,6 +87,9 @@
         <td><%= debt.outstanding_balance %></td>
         <td><a class="btn btn-success" href=<%="/debts/#{debt.id}"%>>Pay Up</a></td>
       </tr>
-    <%end%>
-  </table>
+      <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>
 </div>
