@@ -128,7 +128,7 @@
                         <% if current_user %>
                             <li><%= link_to " Sign Out", "/users/sign_out", class: "fa fa-power-off",method: :delete %></li>
                         <% else %>
-                        <li><%= link_to " Sign In", "/users/sign_in", class: "fa fa-power-off", method: :get %></li>
+                        <li><%= link_to " Sign In", "/users/sign_in", class: "fa fa-sign-in", method: :get %></li>
                         <li><%= link_to " Sign Up", "/users/sign_up", class: "fa fa-edit", method: :get %></li>
                         <% end %>
                     </ul>
@@ -154,7 +154,7 @@
                         <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Menu 5</a>
                     </li> -->
                     <li class=<%= @current %>>
-                        <a href="/invoices"><i class="fa fa-fw fa-wrench"></i> Your Invoices </a>
+                        <a href="/invoices"><i class="fa fa-fw fa-files-o"></i> Your Invoices </a>
                     </li>
                     <!-- <li class=<%= @current %>>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Ruby Pages<i class="fa fa-fw fa-caret-down"></i></a>
@@ -168,10 +168,10 @@
                         </ul>
                     </li> -->
                     <li>
-                        <a href="/debts"><i class="fa fa-fw fa-file"></i> Pay Debts</a>
+                        <a href="/invoices/new"><i class="fa fa-fw fa-plus-square-o"></i> Create Invoice</a>
                     </li>
                     <li>
-                        <a href="/invoices/new"><i class="fa fa-fw fa-dashboard"></i> Create Invoice</a>
+                        <a href="/debts"><i class="fa fa-fw fa-usd"></i> Pay Debts</a>
                     </li>
              <!--    <li>
                 <ul>
@@ -233,14 +233,15 @@
 <%if current_user%>
 <div class="row">
   <div class="col-lg-6">
-    <h3 class="page-header">Summary for <span style="color: lightblue;"><%= current_user.email %></span></h3>
+    <h3 class="page-header" style="color:black;">Summary for <span style="color: black;"><%= current_user.email %></span></h3>
   </div>
     <div class="col-lg-3">
       <div class="btn-group" role="group">
-        <a class="btn btn-default quick-buttons" href=<%="/invoices/new"%>>Create Invoice</a>
+
+        <a class="btn btn-default quick-buttons" href=<%="/invoices/new"%>><i class="fa fa-fw fa-plus-square-o"></i>Create Invoice</a>
       </div>
       <div class="btn-group" role="group">
-        <a class="btn btn-default quick-buttons" href=<%="/debts"%>>Pay a Debt</a>  
+        <a class="btn btn-default quick-buttons" href=<%="/debts"%>><i class="fa fa-fw fa-usd"></i>Pay a Debt</a>  
       </div>
     </div>
 </div>
@@ -248,7 +249,7 @@
 <div class="row">
   <div class="col-lg-9 container">
     <div class="table-responsive">
-      <table class="table table-bordered table-hover table-striped">
+      <table class="table table-bordered table-hover">
       <thead>
         <tr>
           <th>You Owe Others</th>
@@ -256,11 +257,16 @@
           <th>Your Balance</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody style="background-color:#e5f2ff;">
         <tr>
-          <td><%= number_to_currency(current_user.user_debt)  %></td>
-          <td><%= number_to_currency(current_user.user_owed) %></td>
-          <td><%= number_to_currency(current_user.user_balance) %></td>
+          <td style = "color: red;"><i class= "fa fa-sort-desc"></i><%= number_to_currency(current_user.user_debt)  %></td>
+          <td style = "color: green;"><i class= "fa fa-sort-asc"></i><%= number_to_currency(current_user.user_owed) %></td>
+
+          <%if current_user.user_balance < 0 %>
+          <td style = "color: red;"><i class= "fa fa-sort-desc"></i><%= number_to_currency(current_user.user_balance) %></td>
+          <%else%>
+          <td style = "color: green;"><i class= "fa fa-sort-asc"></i><%= number_to_currency(current_user.user_balance) %></td>
+          <%end%>
         </tr>
         </tbody>
       </table>

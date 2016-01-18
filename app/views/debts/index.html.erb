@@ -15,19 +15,19 @@
   <table class="table table-bordered table-hover table-striped">
   <thead>
    <tr>
-     <th>Debt name</th>
-     <th>Who you owe</th>
-     <th>Debt Total Amount</th>
+     <th>User</th>
+     <th>You Owe</th>
+     <th>For</th>
      <th>Amount You've Paid</th>
-     <th>Amount Outstanding</th>
+     <th>Amount You Still Owe</th>
     </tr>
     </thead>
     <tbody>
     <%@debts.each do |debt|%>
       <tr>
-        <td><a href= <%="/debts/#{debt.id}"%>><%= debt.name %></a></td>
         <td><%= debt.invoice.user.email %></td>
         <td><%= number_to_currency(debt.amount) %></td>
+        <td><a href= <%="/debts/#{debt.id}"%>><%= debt.name %></a></td>
         <td><%= number_to_currency(debt.paid_amount_formatted) %></td>
         <td><%= number_to_currency(debt.outstanding_balance) %><a class="btn btn-success payupbtn" href=<%="/debts/#{debt.id}"%>>Pay Up</a></td>
       </tr>

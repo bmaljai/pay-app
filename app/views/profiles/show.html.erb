@@ -59,7 +59,13 @@
       <%end%>
 
       <td>As of: <%= object.updated_at.strftime("%m/%d/%Y") %></td>
-      <td>For: <%= object.name  %></td>
+
+      <%if object.class == Invoice%>
+      <td>For: <a href=<%="/invoices/#{object.id}"%>><%= object.name  %></a></td>
+      <%else%>
+      <td>For: <a href=<%="/debts/#{object.id}" %>><%= object.name  %></a><a class="btn btn-success payupbtn" href=<%="/debts/#{object.id}"%>>Pay Up</a></td>
+      <%end%>
+
     </tr>
     <% end %>
     </tbody>
