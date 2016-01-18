@@ -139,7 +139,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class=<%= @current %>>
-                        <a href="/profiles/dashboard"><i class="fa fa-fw fa-dashboard"></i>Dashboard</a>
+                        <a href="/profiles/dashboard"><i class="fa fa-fw fa-university"></i> User Dashboard</a>
                     </li>
                     <li class=<%= @current %>>
                         <a href="/profiles/recent"><i class="fa fa-fw fa-bar-chart-o"></i>Recent Activity</a>
@@ -147,17 +147,17 @@
                     <li class=<%= @current %>>
                         <a href="/invoices"><i class="fa fa-fw fa-table"></i>All Transactions</a>
                     </li>
-                    <li class=<%= @current %>>
+                    <!-- <li class=<%= @current %>>
                         <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Menu 4</a>
-                    </li>
-                    <li class=<%= @current %>>
+                    </li> -->
+                    <!-- <li class=<%= @current %>>
                         <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Menu 5</a>
-                    </li>
+                    </li> -->
                     <li class=<%= @current %>>
                         <a href="/invoices"><i class="fa fa-fw fa-wrench"></i> Your Invoices </a>
                     </li>
                     <li class=<%= @current %>>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Ruby Pages<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
                                 <a href="#">Dropdown Item</a>
@@ -204,7 +204,14 @@
                     </div>
                 </div> -->
                 <!-- /.row -->
-
+                <div class = "col-lg-9">
+                    <% flash.each do |name, message| %>
+                    <div class="alert alert-<%= name %> alert-dismissable" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <%= message %>
+                  </div>
+                  <% end %>
+              </div>
             
                 <!-- /.row -->
 

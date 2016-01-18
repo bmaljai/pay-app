@@ -1,11 +1,11 @@
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-lg-9">
     <h1 class="page-header"><%= current_user.email %></h1>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-lg-12 container">
+  <div class="col-lg-9 container">
     <h3>Summary</h3>
     <div class="table-responsive">
       <table class="table table-bordered table-hover table-striped">
@@ -29,7 +29,7 @@
 </div>
 
 <div class="row">
-  <div class = "col-lg-12 container">
+  <div class = "col-lg-9 container">
     <h3>Invoices</h3>
     <div class ="table-responsive">
       <table class="table table-bordered table-hover table-striped">
@@ -63,7 +63,7 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-12 container">
+  <div class="col-lg-9 container">
     <h3>Debts you owe</h3>
     <div class="table-responsive">
       <table class="table table-bordered table-hover table-striped">
@@ -84,8 +84,7 @@
         <td><%= debt.invoice.user.email %></td>
         <td><%= debt.amount %></td>
         <td><%= debt.paid_amount_formatted %></td>
-        <td><%= debt.outstanding_balance %></td>
-        <td><a class="btn btn-success" href=<%="/debts/#{debt.id}"%>>Pay Up</a></td>
+        <td><%= debt.outstanding_balance %><a class="btn btn-success payupbtn" href=<%="/debts/#{debt.id}"%>>Pay Up</a></td>
       </tr>
       <%end%>
       </tbody>

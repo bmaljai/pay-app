@@ -1,6 +1,10 @@
 class Invoice < ActiveRecord::Base
-  has_many :debts
+  has_many :debts, dependent: :destroy
   belongs_to :user
+
+  validates :name, :amount, presence: true
+  validates :amount, numericality: true
+  validates :amount, numericality: {greater_than: 0}
 
   def others_owe
     owed = 0
@@ -36,4 +40,20 @@ class Invoice < ActiveRecord::Base
     return paid
   end
   
+  def total_debts
+    alldebts = 0
+    debts.each do |debt|
+      if debt.amount == nil 
+        alldebts += 0
+      else
+        alldebts += debt.amount
+      end
+    end
+    return alldebts
+  end
+
+  def valid_debt_amount
+    return (amount - total_debts)
+  end
+
 end

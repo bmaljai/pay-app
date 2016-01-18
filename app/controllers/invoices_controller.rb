@@ -11,8 +11,15 @@ class InvoicesController < ApplicationController
 
   def create
     puts "this is the current user id #{current_user.id}"
-    invoice = Invoice.create(user_id: current_user.id, name: params[:name], amount: params[:amount], paid: false)
-    redirect_to "/invoices/#{invoice.id}"
+    invoice = Invoice.new(user_id: current_user.id, name: params[:name], amount: params[:amount], paid: false)
+    if invoice.save
+      flash[:success] = "Invoice created"
+      redirect_to "/invoices/#{invoice.id}"
+    else
+      flash[:warning]= invoice.errors.messages
+      render :new
+    end
+    
   end
 
   def show
