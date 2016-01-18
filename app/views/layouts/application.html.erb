@@ -139,7 +139,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class=<%= @current %>>
-                        <a href="/profiles/dashboard"><i class="fa fa-fw fa-university"></i> User Dashboard</a>
+                        <a href="/profiles/dashboard"><i class="fa fa-fw fa-balance-scale"></i> User Dashboard</a>
                     </li>
                    <!--  <li class=<%= @current %>>
                         <a href="/profiles/recent"><i class="fa fa-fw fa-bar-chart-o"></i>Recent Activity</a>
@@ -173,13 +173,13 @@
                     <li>
                         <a href="/invoices/new"><i class="fa fa-fw fa-dashboard"></i> Create Invoice</a>
                     </li>
-                <li>
+             <!--    <li>
                 <ul>
                 <% current_user.favoritees.each do |friend|%>
                     <li><%= friend.email %></li>
                 <% end %>
                 </ul>
-                </li>
+                </li> -->
                 </ul>
             </div>
             <% end %>
@@ -230,7 +230,7 @@
 <div class = "published_view">
 
 
-
+<%if current_user%>
 <div class="row">
   <div class="col-lg-6">
     <h3 class="page-header">Summary for <span style="color: lightblue;"><%= current_user.email %></span></h3>
@@ -267,6 +267,7 @@
     </div>
   </div>
 </div>
+<% end %>
 <%= yield %>
 </div>
 

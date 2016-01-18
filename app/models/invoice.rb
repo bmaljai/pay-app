@@ -6,6 +6,10 @@ class Invoice < ActiveRecord::Base
   validates :amount, numericality: true
   validates :amount, numericality: {greater_than: 0}
 
+  def invoice_remainder
+    return others_owe - others_paid
+  end
+
   def others_owe
     owed = 0
     debts.each do |debt|

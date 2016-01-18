@@ -33,12 +33,32 @@ class User < ActiveRecord::Base
     return user_owed - user_debt
   end
 
-  def get_recent
-    recent_array = []
+  def unpaid_invoices
+    unpaid = []
     invoices.each do |invoice|
+      if !invoice.paid
+        unpaid << invoice
+      end
+    end
+    return unpaid
+  end
+
+  def unpaid_debts
+    unpaid = []
+    debts.each do |debt|
+      if !debt.paid
+        unpaid << debt
+      end
+    end
+    return unpaid
+  end
+
+  def get_recent_unpaid
+    recent_array = []
+    unpaid_invoices.each do |invoice|
       recent_array << invoice
     end
-    debts.each do |debt|
+    unpaid_debts.each do |debt|
       recent_array << debt
     end
     sorted_array = recent_array.sort_by{ |k| k.updated_at }

@@ -27,9 +27,9 @@
       <tr>
         <td><a href= <%="/debts/#{debt.id}"%>><%= debt.name %></a></td>
         <td><%= debt.invoice.user.email %></td>
-        <td><%= debt.amount %></td>
-        <td><%= debt.paid_amount_formatted %></td>
-        <td><%= debt.outstanding_balance %><a class="btn btn-success payupbtn" href=<%="/debts/#{debt.id}"%>>Pay Up</a></td>
+        <td><%= number_to_currency(debt.amount) %></td>
+        <td><%= number_to_currency(debt.paid_amount_formatted) %></td>
+        <td><%= number_to_currency(debt.outstanding_balance) %><a class="btn btn-success payupbtn" href=<%="/debts/#{debt.id}"%>>Pay Up</a></td>
       </tr>
     <%end%>
     </tbody>

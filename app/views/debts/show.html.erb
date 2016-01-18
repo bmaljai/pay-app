@@ -19,9 +19,9 @@
     <tbody>
     <tr>
       <td><%= @debt.invoice.user.email %></td>
-      <td><%= @debt.amount %></td>
-      <td><%= @debt.paid_amount_formatted %></td>
-      <td><%= @debt.outstanding_balance %></td>
+      <td><%= number_to_currency(@debt.amount) %></td>
+      <td><%= number_to_currency(@debt.paid_amount_formatted) %></td>
+      <td><%= number_to_currency(@debt.outstanding_balance) %></td>
     </tr>
     </tbody>
 </table>

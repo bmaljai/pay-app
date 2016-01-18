@@ -24,29 +24,42 @@
 
 <div class="row">
 <div class="col-lg-9">
-<h3 class = "page-header">Recent Activity</h3>
+<h3 class = "page-header">Overview</h3>
 </div>
 </div>
 
 <div class="row">
 <div class="col-lg-9 container">
 <div class="table-responsive">
-  <table class="table table-bordered table-hover table-striped">
+  <table class="table table-bordered table-hover">
     <thead>
     <tr>
-      <th>Name</th>
-      <th>Info</th>
+      <th>Action</th>
+      <th>Party</th>
       <th>Amount</th>
       <th>Date</th>
+      <th>Description</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody style="background-color:#e5f2ff;">
     <% @sorted_recent.each do |object| %>
     <tr>
-      <td><%= object.name  %></td>
-      <td><%= object.class %></td>
-      <td><%= object.amount %></td>
-      <td><%= object.updated_at.strftime("%m/%d/%Y") %></td>
+      <td><%= vectorize(object) %></td>
+
+      <%if object.class == Invoice %>
+      <td>from <%= object.debts.length %> users</td>
+      <%else%>
+      <td>to <%= object.invoice.user.email %></td>
+      <%end%>
+
+      <%if object.class == Invoice %>
+      <td style = "color: green;"><i class= "fa fa-sort-asc"></i><%= number_to_currency(object.invoice_remainder) %></td>
+      <%else%>
+      <td style = "color: red;"><i class= "fa fa-sort-desc"></i><%= number_to_currency(object.outstanding_balance) %></td>
+      <%end%>
+
+      <td>As of: <%= object.updated_at.strftime("%m/%d/%Y") %></td>
+      <td>For: <%= object.name  %></td>
     </tr>
     <% end %>
     </tbody>

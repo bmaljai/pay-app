@@ -8,6 +8,13 @@ class Debt < ActiveRecord::Base
   validates :amount, numericality: {greater_than: 0}
 
   validate :debt_less_than_invoice_amount_minus_debts
+  validate :exclude_current_user_from_debt
+
+  def exclude_current_user_from_debt
+    if user_id == invoice.user.id
+      errors.add(:user_id, "cannot assign debts to yourself")
+    end
+  end
 
   def debt_less_than_invoice_amount_minus_debts
       if ((amount.to_f > invoice.valid_debt_amount) || (amount.to_f < 0))
@@ -46,6 +53,12 @@ class Debt < ActiveRecord::Base
       paid = false
     end
     return paid
+  end
+
+  def toggle_when_paid
+    if outstanding_balance == 0
+      paid = true
+    end
   end
 
 
