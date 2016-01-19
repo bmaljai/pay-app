@@ -59,6 +59,7 @@ class Debt < ActiveRecord::Base
     if outstanding_balance == 0
       paid = true
     end
+    return paid
   end
 
 

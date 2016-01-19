@@ -35,16 +35,19 @@
   <%= form_tag "/debts/#{@debt.id}", method: :patch do %>
   <table>
     <tr>
-      <td>
+      <td style="padding: 10px;">
         <%= label_tag :amount%>
       </td>
-      <td>
+      <td style="padding: 10px;">
         <%= text_field_tag :amount%>
+      </td>
+      <td style="padding: 10px;">
+        <%= submit_tag "Pay Up"%>
       </td>
     </tr>
   </table>
   <%= hidden_field_tag :id, @debt.id %>
-  <%= submit_tag "Pay Up"%>
+  
   <% end %>
 </div>
 </div>

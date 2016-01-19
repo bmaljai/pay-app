@@ -73,35 +73,42 @@
 
 <div class="row">
   <div class="col-lg-9">
-    <h3>Assign Debt</h3>
+    <h3>Assign a Debt</h3>
     <%= form_tag '/debts', class: "form-horizontal", method: :post do %>
-    <table>
-        <td>
+    <table style="margin: 5px">
+      <tr>
+        <td style="padding: 10px">
           <%= label_tag :name%>
         </td>
-        <td>
+        <td style="padding: 10px">
           <%= text_field_tag :name%>
         </td>
       </tr>
       <tr>
-        <td>
+        <td style="padding: 10px">
           <%= label_tag :email%>
         </td>
-        <td>
+        <td style="padding: 10px">
           <%= text_field_tag :email%>
         </td>
       </tr>
       <tr>
-        <td>
+        <td style="padding: 10px">
           <%= label_tag :amount%>
         </td>
-        <td>
+        <td style="padding: 10px">
           <%= text_field_tag :amount%>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td style="padding: 10px; float:right;">
+        <%= submit_tag "Assign Debt"%>
         </td>
       </tr>
     </table>
     <%= hidden_field_tag :invoice_id, @invoice.id %>
-    <%= submit_tag "Assign Debt"%>
+    
     <% end %>
   </div>
 </div>
