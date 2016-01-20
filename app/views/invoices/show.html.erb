@@ -48,7 +48,6 @@
             <th>User Has Paid</th>
             <th>User Still Owes</th>
             <th></th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -59,7 +58,6 @@
             <td><%= debt.name %></td>
             <td><%= number_to_currency(debt.paid_amount_formatted) %></td>
             <td><%= number_to_currency(debt.outstanding_balance) %></td>
-            <td><%= link_to "Edit", "/debts/#{debt.id}/edit", method: :get %></td>
             <td><%= link_to "Delete", "/debts/#{debt.id}", method: :delete %>
             </td>
           </tr>
@@ -73,12 +71,12 @@
 
 <div class="row">
   <div class="col-lg-9">
-    <h3>Assign a Debt</h3>
+    <h3>Assign a Debt (<%= number_to_currency(@invoice.amount - @invoice.others_owe)%> left)</h3>
     <%= form_tag '/debts', class: "form-horizontal", method: :post do %>
     <table style="margin: 5px">
       <tr>
         <td style="padding: 10px">
-          <%= label_tag :name%>
+          <%= label_tag :name, "Description"%>
         </td>
         <td style="padding: 10px">
           <%= text_field_tag :name%>
@@ -86,7 +84,7 @@
       </tr>
       <tr>
         <td style="padding: 10px">
-          <%= label_tag :email%>
+          <%= label_tag :email, "User Email"%>
         </td>
         <td style="padding: 10px">
           <%= text_field_tag :email%>

@@ -17,7 +17,7 @@
         </thead>
         <tbody>
         <% @invoices.each do |invoice| %>  
-        <% if !invoice.paid? %>
+        <% if @invoices.count > 0 %>
         <tr>
           <td>
             <a href= <%="/invoices/#{invoice.id}"%>><%= invoice.name %></a>
@@ -25,7 +25,11 @@
           <td><%= number_to_currency(invoice.amount) %></td>
           <td><%= number_to_currency(invoice.others_owe) %></td>
           <td><%= number_to_currency(invoice.others_paid) %></td>
+          <% if invoice.paid %>
+          <td style="color: green;">Paid in full</td>
+          <% else %>
           <td><%= number_to_currency(invoice.invoice_remainder) %></td>
+          <% end %>
           <td><%= number_to_currency(invoice.chump_value) %></td>
         </tr>
         <% end %>

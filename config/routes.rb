@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # root to: 'pages#landing'
   root to: "profiles#show"
 
-  get '/pages/landing', to: 'pages#landing'
+  # get '/pages/landing', to: 'pages#landing'
   resources :pages
   
   get '/profiles/recent', to: 'profiles#recent'

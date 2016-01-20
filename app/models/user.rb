@@ -12,6 +12,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  def user_is_owed
+    total = 0
+    invoices.each do |invoice|
+      total += (invoice.others_owe - invoice.others_paid)
+    end
+    return total
+  end
 
   def user_debt
     total_debt = 0
@@ -30,7 +37,7 @@ class User < ActiveRecord::Base
   end
 
   def user_balance
-    return user_owed - user_debt
+    return user_is_owed - user_debt
   end
 
   def unpaid_invoices

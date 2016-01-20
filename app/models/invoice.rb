@@ -60,4 +60,12 @@ class Invoice < ActiveRecord::Base
     return (amount - total_debts)
   end
 
+  def toggle_when_paid
+    if invoice_remainder == 0
+      update(paid: true)
+    else
+      update(paid: false)
+    end
+  end
+  
 end

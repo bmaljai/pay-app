@@ -36,17 +36,17 @@
   <table>
     <tr>
       <td style="padding: 10px;">
-        <%= label_tag :amount%>
+        <%= label_tag :amount, "Payment Amount"%>
       </td>
       <td style="padding: 10px;">
-        <%= text_field_tag :amount%>
+        <%= text_field_tag :amount %>
       </td>
       <td style="padding: 10px;">
+        <%= hidden_field_tag :id, @debt.id %>
         <%= submit_tag "Pay Up"%>
       </td>
     </tr>
   </table>
-  <%= hidden_field_tag :id, @debt.id %>
   
   <% end %>
 </div>

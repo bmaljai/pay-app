@@ -5,13 +5,14 @@ class ProfilesController < ApplicationController
   def show
     if current_user
       @user = current_user
+      
       @sorted_recent = @user.get_recent_unpaid
 
       @invoices = Invoice.where(user_id: current_user.id)
       @debts = Debt.where(user_id: current_user.id)
 
     else
-      redirect_to "/pages/landing"
+      redirect_to "/pages"
     end
   end
 
@@ -20,7 +21,7 @@ class ProfilesController < ApplicationController
      @user = current_user
      @sorted_recent = @user.get_recent_unpaid
     else
-      redirect_to "/pages/landing"
+      redirect_to "/pages"
     end
   end
 end

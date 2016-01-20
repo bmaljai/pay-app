@@ -27,7 +27,6 @@
 <h3 class = "page-header">Overview</h3>
 </div>
 </div>
-
 <div class="row">
 <div class="col-lg-9 container">
 <div class="table-responsive">
@@ -41,6 +40,7 @@
       <th>Description</th>
     </tr>
     </thead>
+<% if @invoices.count + @debts.count > 0 %>
     <tbody style="background-color:#e5eeff;">
     <% @sorted_recent.each do |object| %>
     <tr>
@@ -69,6 +69,7 @@
     </tr>
     <% end %>
     </tbody>
+    <% end %>
   </table>
 </div>
 </div>

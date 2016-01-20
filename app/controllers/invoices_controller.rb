@@ -16,7 +16,7 @@ class InvoicesController < ApplicationController
       flash[:success] = "Invoice created"
       redirect_to "/invoices/#{invoice.id}"
     else
-      flash[:warning]= invoice.errors.messages
+      flash[:warning]= invoice.errors.full_messages.join("</br>")
       render :new
     end
     
@@ -24,6 +24,7 @@ class InvoicesController < ApplicationController
 
   def show
     @invoice = Invoice.find(params[:id])
+    @invoice.toggle_when_paid
   end
 
   def edit

@@ -209,7 +209,7 @@
                     <% flash.each do |name, message| %>
                     <div class="alert alert-<%= name %> alert-dismissable" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <%= message %>
+                      <%= message.html_safe %>
                   </div>
                   <% end %>
               </div>
@@ -261,7 +261,7 @@
         <tbody style="background-color:#e5eeff;">
         <tr>
           <td style = "color: red;"><i class= "fa fa-sort-desc"></i><%= number_to_currency(current_user.user_debt)  %></td>
-          <td style = "color: green;"><i class= "fa fa-sort-asc"></i><%= number_to_currency(current_user.user_owed) %></td>
+          <td style = "color: green;"><i class= "fa fa-sort-asc"></i><%= number_to_currency(current_user.user_is_owed) %></td>
 
           <%if current_user.user_balance < 0 %>
           <td style = "color: red;"><i class= "fa fa-sort-desc"></i><%= number_to_currency(current_user.user_balance) %></td>

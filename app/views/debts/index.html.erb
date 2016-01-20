@@ -29,7 +29,11 @@
         <td><%= number_to_currency(debt.amount) %></td>
         <td><a href= <%="/debts/#{debt.id}"%>><%= debt.name %></a></td>
         <td><%= number_to_currency(debt.paid_amount_formatted) %></td>
+        <%if debt.paid %>
+        <td style="color: green;">Paid in full</td>
+        <%else%>
         <td><%= number_to_currency(debt.outstanding_balance) %><a class="btn btn-success payupbtn" href=<%="/debts/#{debt.id}"%>>Pay Up</a></td>
+        <%end%>
       </tr>
     <%end%>
     </tbody>

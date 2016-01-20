@@ -18,7 +18,7 @@ class Debt < ActiveRecord::Base
 
   def debt_less_than_invoice_amount_minus_debts
       if ((amount.to_f > invoice.valid_debt_amount) || (amount.to_f < 0))
-        errors.add(:amount, "Amount is too high")
+        errors.add(:amount, "Invalid Amount")
       end
   end
 
@@ -57,9 +57,8 @@ class Debt < ActiveRecord::Base
 
   def toggle_when_paid
     if outstanding_balance == 0
-      paid = true
+      update(paid: true)
     end
-    return paid
   end
 
 

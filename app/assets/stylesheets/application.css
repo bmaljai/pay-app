@@ -13,6 +13,7 @@
  *= require theme/bootstrap.min
  *= require theme/sb-admin
  *= require theme/plugins/morris
+ *= require theme/landing/landing-page
  *= require font-awesome
  *= require_tree .
  *= require_self
