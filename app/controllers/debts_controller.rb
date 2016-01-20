@@ -17,7 +17,7 @@ class DebtsController < ApplicationController
     @debt = Debt.new(name: params[:name], amount: params[:amount], paid: false, invoice_id: params[:invoice_id], paid_amount: 0, user_id: userId)
 
     if @debt.save
-      UserMailer.welcome_email(@debt.user.email).deliver_now
+      UserMailer.welcome_email(@debt.user.email, @debt.invoice.user.email, @debt.amount, @debt.name, "http://localhost:3000/debts/#{@debt.id}").deliver_now
       @debt.invoice.toggle_when_paid
       flash[:success] = "debt created"
     else
@@ -72,12 +72,12 @@ class DebtsController < ApplicationController
 
         new_amount = amount_to_update + current_amount
 
-        puts "this is the new amount #{new_amount}"
-        puts "this is the paid amount before #{@debt.paid_amount}"
+        # puts "this is the new amount #{new_amount}"
+        # puts "this is the paid amount before #{@debt.paid_amount}"
         @debt.update(paid_amount: new_amount)
-        puts "this is the paid amount after #{@debt.paid_amount}"
-        @debt.save
-        puts @debt.errors.full_messages
+        # puts "this is the paid amount after #{@debt.paid_amount}"
+        # @debt.save
+        # puts @debt.errors.full_messages
         @debt.toggle_when_paid
         @debt.invoice.toggle_when_paid
 

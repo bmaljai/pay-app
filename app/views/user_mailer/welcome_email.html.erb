@@ -4,14 +4,23 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome to example.com, </h1>
+    <h1>Hey, it's time to PayUp!</h1>
     <p>
-      You have successfully signed up to example.com,
-      your username is: .<br>
+      User <%= @user %>, says you owe them for the following:
     </p>
+
+      <table>
+      <tr>
+      <td>You Owe</td>
+      <td><strong><%= number_to_currency(@debt_amount) %></strong></td>
+      <td>For</td>
+      <td><strong><%= @debt_name %></strong></td>
+      </tr>
+      </table>
+
     <p>
-      To login to the site, just follow this link: <%= @url %>.
+      To pay, just <a href=<%= @debt_link %>>click here.</a>
     </p>
-    <p>Thanks for joining and have a great day!</p>
+    <p>Or you can <a href=<%= @url %>>login to your PayUp account</a> and pay from there.</p>
   </body>
 </html>
