@@ -36,48 +36,57 @@ class DebtsController < ApplicationController
   end
 
   def update
-    if params[:invoice_edit]
-      if User.find_by(email: params[:email])
-        user_id = User.find_by(email: params[:email]).id
-      end
-      debt = Debt.find(params[:id])
+    # if params[:invoice_edit]
+    #   if User.find_by(email: params[:email])
+    #     user_id = User.find_by(email: params[:email]).id
+    #   end
+    #   debt = Debt.find(params[:id])
       
-      if debt.update(user_id: user_id, amount: params[:amount], name: params[:name])
-        flash[:success] = "debt created"
-        redirect_to "/invoices/#{debt.invoice.id}"
-      else
-        @debt = Debt.find(params[:id])
-        flash[:warning] = debt.errors.full_messages.join("</br>")
-        render :edit
-      end
+    #   if debt.update(user_id: user_id, amount: params[:amount], name: params[:name])
+    #     flash[:success] = "debt created"
+    #     redirect_to "/invoices/#{debt.invoice.id}"
+    #   else
+    #     @debt = Debt.find(params[:id])
+    #     flash[:warning] = debt.errors.full_messages.join("</br>")
+    #     render :edit
+    #   end
       
-    else
+    # else
 
       @debt = Debt.find(params[:id])
+      puts "this is the debt object #{@debt}"
 
-      if ((params[:amount].to_f+Debt.find(params[:id]).paid_amount) > Debt.find(params[:id]).amount)
+      if ( (params[:amount].to_f + @debt.paid_amount) > @debt.amount )
         flash.now[:danger] = "Your paid amount cannot surpass the debt amount"
         render :show
 
       else 
+
         amount_to_update = params[:amount].to_f
+
         current_amount = 0 
-        if Debt.find(params[:id]).paid_amount
-        current_amount = Debt.find(params[:id]).paid_amount
+
+        if @debt.paid_amount
+          current_amount = @debt.paid_amount
         end
+
         new_amount = amount_to_update + current_amount
 
-        Debt.find(params[:id]).update(paid_amount: new_amount)
-
-        Debt.find(params[:id]).toggle_when_paid
-        Debt.find(params[:id]).invoice.toggle_when_paid
+        puts "this is the new amount #{new_amount}"
+        puts "this is the paid amount before #{@debt.paid_amount}"
+        @debt.update(paid_amount: new_amount)
+        puts "this is the paid amount after #{@debt.paid_amount}"
+        @debt.save
+        puts @debt.errors.full_messages
+        @debt.toggle_when_paid
+        @debt.invoice.toggle_when_paid
 
         redirect_to "/debts/#{params[:id]}"
 
         
       end
 
-    end
+    # end
   end
 
   def destroy

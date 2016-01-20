@@ -10,6 +10,9 @@ class ProfilesController < ApplicationController
 
       @invoices = Invoice.where(user_id: current_user.id)
       @debts = Debt.where(user_id: current_user.id)
+      @invoices.each do |invoice|
+        invoice.toggle_when_paid
+      end
 
     else
       redirect_to "/pages"
@@ -23,5 +26,9 @@ class ProfilesController < ApplicationController
     else
       redirect_to "/pages"
     end
+  end
+
+  def statistics
+    @debts = Debt.where(user_id: current_user.id)
   end
 end

@@ -7,7 +7,7 @@ class Debt < ActiveRecord::Base
   validates :amount, numericality: true
   validates :amount, numericality: {greater_than: 0}
 
-  validate :debt_less_than_invoice_amount_minus_debts
+  validate :debt_less_than_invoice_amount_minus_debts, on: :create
   validate :exclude_current_user_from_debt
 
   def exclude_current_user_from_debt

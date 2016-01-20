@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :pages
   
   get '/profiles/recent', to: 'profiles#recent'
+  get '/profiles/mystats', to: 'profiles#statistics'
   resources :profiles
   resources :users
   resources :invoices
