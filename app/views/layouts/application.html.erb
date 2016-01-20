@@ -174,9 +174,9 @@
                     <li>
                         <a href="/debts"><i class="fa fa-fw fa-usd"></i> Pay Debts</a>
                     </li>
-                    <li>
+                   <!--  <li>
                         <a href="/profiles/mystats"><i class="fa fa-fw fa-area-chart"></i> My Stats</a>
-                    </li>
+                    </li> -->
              <!--    <li>
                 <ul>
                 <% current_user.favoritees.each do |friend|%>
@@ -263,13 +263,24 @@
         </thead>
         <tbody style="background-color:#e5eeff;">
         <tr>
+        <% if current_user.user_debt == 0%>
+        <td style = "color: grey;"><%= number_to_currency(current_user.user_debt)  %></td>
+          <% else %>
           <td style = "color: red;"><i class= "fa fa-sort-desc"></i><%= number_to_currency(current_user.user_debt)  %></td>
+          <% end %>
+
+          <% if current_user.user_is_owed == 0 %>
+          <td style = "color: grey;"><%= number_to_currency(current_user.user_is_owed) %></td>
+          <% else %>
           <td style = "color: green;"><i class= "fa fa-sort-asc"></i><%= number_to_currency(current_user.user_is_owed) %></td>
+          <% end %>
 
           <%if current_user.user_balance < 0 %>
           <td style = "color: red;"><i class= "fa fa-sort-desc"></i><%= number_to_currency(current_user.user_balance) %></td>
-          <%else%>
+          <%elsif current_user.user_balance > 0 %>
           <td style = "color: green;"><i class= "fa fa-sort-asc"></i><%= number_to_currency(current_user.user_balance) %></td>
+          <%else %>
+          <td style = "color: grey;"><%= number_to_currency(current_user.user_balance) %></td>
           <%end%>
         </tr>
         </tbody>
